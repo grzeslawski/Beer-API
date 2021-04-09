@@ -22,20 +22,10 @@ const render = (data) => {
   container.appendChild(fragment);
 };
 
-const success = (data) => {
-  const beers = JSON.parse(data.target.responseText);
-  render(beers);
-};
+const success = (response) => response.json();
 
 const error = (err) => {
   console.log(err);
 };
 
-const req = new XMLHttpRequest();
-
-req.onload = success;
-req.onerror = error;
-
-req.open("GET", API_URL);
-
-req.send();
+fetch(API_URL).then(success).then(render).catch(error);
