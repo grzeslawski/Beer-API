@@ -1,0 +1,27 @@
+$color-light-green: #86c232;
+$color-dark-green: #61892f;
+$color-light-grey: #6b6e70;
+$color-dark-grey: #474b4f;
+$color-black: #222629;
+$color-white: #ffffff;
+
+$bg-color: $color-black;
+$primary-color: $color-light-green;
+
+$breakpoints: (
+  "xs": 480px,
+  "sm": 767px,
+  "md": 992px,
+  "lg": 1200px,
+);
+
+@mixin media-breakpoint-up($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+          + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
